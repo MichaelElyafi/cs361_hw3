@@ -43,9 +43,7 @@ shell_usage(){
 	int flag = 0;
 	int temp = 0;
 	int pid = 0;
-	int pid_2 = 0;
 	int status = 0;
-	int status_2 = 0;
 	char *fd = '\0';
 	i = 0;
 	
@@ -123,8 +121,6 @@ shell_usage(){
 	else {
 		wait(&status);
 		if(flag = 1){
-			pid_2 = fork();
-			if(pid_2 == 0){
 				if(IO_2[0] != '\0'){
 					if(!strcmp(IO_2[0], "<")){
 						int fd1 = open(fd, O_RDONLY);
@@ -139,14 +135,8 @@ shell_usage(){
 				}
 				exit(execv(IO_Multi[0], IO_Multi));
 			}
-			else{
-				wait(&status_2);
-			}
 		}
 		printf("pid:%i status:%i\n", pid, status,  WEXITSTATUS(status));
-		if(pid_2 != 0){
-			printf("pid:%i status:%i\n", pid_2, status_2,  WEXITSTATUS(status_2));
-		}
 	}
 	}
 }
